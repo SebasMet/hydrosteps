@@ -4,10 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
 public class LoginController {
+
+    private DatabaseConnection dbConnection = null;
 
     @FXML
     private TextField usernameField;
@@ -17,7 +20,6 @@ public class LoginController {
 
     @FXML
     protected void handleLogin() {
-        DatabaseConnection dbConnection = null;
         try {
             dbConnection = DatabaseConnection.getInstance(null);
         } catch (SQLException e) {
@@ -29,8 +31,11 @@ public class LoginController {
 
         System.out.println("Username: " + username + ", Password: " + password);
 
-         if(dbConnection.checkCredentials(username, password)) {
+     if(dbConnection.checkCredentials(username, password)) {
+//        if(true) {
              System.out.println("Valid asf");
+             HydroStepsApplication.switchScene("dashboard.fxml", (Stage) passwordField.getScene().getWindow());
+
          }
          else {
              System.out.println("not valid");

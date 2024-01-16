@@ -6,6 +6,7 @@ import java.io.File;
 public class DatabaseConnection {
     private static DatabaseConnection instance;
     private Connection connection;
+    private int currentUserId;
     private String url = "jdbc:sqlite:src/hydrosteps.db";
 
     private DatabaseConnection(String args) throws SQLException {
@@ -39,13 +40,14 @@ public class DatabaseConnection {
     }
 
     public boolean checkCredentials(String username, String password) {
-        String query = "SELECT COUNT(*) FROM User WHERE username = ? AND password = ?";
+        String query = "SELECT userID FROM User WHERE username = ? AND password = ?";
         try (PreparedStatement statement = this.connection.prepareStatement(query)) {
             statement.setString(1, username);
             statement.setString(2, password);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    return resultSet.getInt(1) > 0;
+                    currentUserId = resultSet.getInt("userID"); // Retrieve and store the userID
+                    return true; // Return true since user is found
                 }
             }
         } catch (SQLException e) {
@@ -53,6 +55,30 @@ public class DatabaseConnection {
         }
         return false;
     }
+
+    public String[] getUserData() {
+        String query = "SELECT * FROM User WHERE userID = ?";
+
+        try (PreparedStatement pstmt = this.connection.prepareStatement(query)) {
+            pstmt.setString(1, String.valueOf(this.currentUserId));
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String fullname = rs.getString("fullname");
+                    float weight = rs.getFloat("weight");
+                    float height = rs.getFloat("height");
+
+                    String[] userData = {fullname, String.valueOf(weight), String.valueOf(height)};
+                    return userData;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("userID not found");
+        return null;
+    }
+
 
     private void setupDatabase() {
         try (Statement statement = connection.createStatement()) {

@@ -14,12 +14,33 @@ import java.io.IOException;
 public class HydroStepsApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HydroStepsApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        switchScene("login-view.fxml", stage);
         stage.setTitle("Hello!");
-        stage.setScene(scene);
         stage.show();
     }
+    public static void switchScene(String fxmlPath, Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HydroStepsApplication.class.getResource(fxmlPath));
+            Scene newScene = new Scene(fxmlLoader.load());
+            stage.setScene(newScene);
+
+            if (fxmlPath.equals("dashboard.fxml")) {
+                DashboardController dashboardController = fxmlLoader.getController();
+                startMicrobitReader(dashboardController);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void startMicrobitReader(DashboardController controller) {
+        MicrobitReader reader = new MicrobitReader(controller);
+        Thread readerThread = new Thread(reader);
+        readerThread.start();
+
+    }
+
 
     public static void main(String[] args) {
 //        args[0] = "joe";
@@ -29,6 +50,10 @@ public class HydroStepsApplication extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//        MicrobitReader reader = new MicrobitReader();
+//        Thread readerThread = new Thread(reader);
+//        readerThread.start();
 
         launch();
     }
