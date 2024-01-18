@@ -15,13 +15,13 @@ public class HydroStepsApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         switchScene("login-view.fxml", stage);
-        stage.setTitle("Hello!");
+        stage.setTitle("Hydrosteps!");
         stage.show();
     }
     public static void switchScene(String fxmlPath, Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HydroStepsApplication.class.getResource(fxmlPath));
-            Scene newScene = new Scene(fxmlLoader.load());
+            Scene newScene = new Scene(fxmlLoader.load(), 1600, 800 );
             stage.setScene(newScene);
 
             if (fxmlPath.equals("dashboard.fxml")) {
@@ -43,7 +43,6 @@ public class HydroStepsApplication extends Application {
 
 
     public static void main(String[] args) {
-//        args[0] = "joe";
         System.out.println(args[0]);
         try {
             DatabaseConnection.getInstance(args[0]);

@@ -5,22 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40fcccbf-4e57-4b85-b479-694c914503e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/DashboardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/MicrobitReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/dashboard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hydrosteps.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/hydrosteps.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/DashboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/HydroStepsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/HydroStepsApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/login-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/DatabaseConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/DatabaseConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/MicrobitReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/MicrobitReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/login-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/HydroStepsApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/HydroStepsApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +94,9 @@
       <workItem from="1704928329353" duration="1093000" />
       <workItem from="1704965222194" duration="18697000" />
       <workItem from="1705095087718" duration="386000" />
-      <workItem from="1705423905881" duration="2064000" />
+      <workItem from="1705423905881" duration="2569000" />
+      <workItem from="1705500537824" duration="184000" />
+      <workItem from="1705512062345" duration="10290000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,18 @@
+.root {
+    -fx-base: rgb(50, 50, 50);
+    -fx-background-color: #333333;
+}
+
+.text-field, .password-field {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-max-width: 200px;
+}
+
+.button {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-padding: 10 20;
+}

@@ -6,8 +6,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.sql.SQLException;
 
 public class DashboardController {
@@ -21,6 +19,8 @@ public class DashboardController {
     private Label userHeightLabel;
     @FXML
     private Label totalStepsLabel;
+    @FXML
+    private Label totalMlWaterConsumed;
 
     private IntegerProperty someInteger = new SimpleIntegerProperty(0);
 
@@ -34,17 +34,19 @@ public class DashboardController {
         userHeightLabel.setText("Height: " + userData[2]);
     }
 
-    public void updateInteger(byte[] newValue) {
-        String newText = new String(newValue);
-        if(!isStringEmptyOrWhitespace(newText)) {
+    public void updateTotalSteps(String newText) {
             System.out.println("ACTUAL VALUE " + newText);
+            System.out.println("2 over");
             Platform.runLater(() -> {
                 totalStepsLabel.setText("Total Steps: " + newText);
             });
-        }
     }
 
-    private boolean isStringEmptyOrWhitespace(String str) {
-        return str == null || str.trim().isEmpty();
+    public void updateTotalMlConsumed(String totalAmound) {
+        Platform.runLater(() -> {
+            totalMlWaterConsumed.setText("Total ML Water Consumed: " + totalAmound);
+        });
+
+
     }
 }

@@ -8,7 +8,7 @@ public class MicrobitReader implements Runnable {
 
     private volatile boolean running = true;
     private SerialPort comPort;
-
+    private StringBuilder buffer = new StringBuilder();
     private DashboardController dashboardController;
 
     public MicrobitReader(DashboardController dashboardController) {
@@ -38,10 +38,22 @@ public class MicrobitReader implements Runnable {
                     return;
                 byte[] newData = new byte[comPort.bytesAvailable()];
                 int numRead = comPort.readBytes(newData, newData.length);
-                System.out.println("Read " + numRead + " bytes.");
-                System.out.println(new String(newData));
-                dashboardController.updateInteger(newData);
-
+//                System.out.println("Read " + numRead + " bytes.");
+                String stringData = new String(newData);
+                buffer.append(stringData);
+//                System.out.println(stringData);
+                if (buffer.toString().contains("\n")) {
+                    String completeData = buffer.toString();
+                    System.out.println("String data: " + completeData);
+                    if (completeData.contains("ML")) {
+                        dashboardController.updateTotalMlConsumed(completeData.replaceAll("\\D", ""));
+                    } else {
+                        System.out.println("UPDATE STEPS");
+                        dashboardController.updateTotalSteps(completeData.replaceAll("\\D", ""));
+                    }
+                    buffer = new StringBuilder();
+                    System.out.println("RESET" + buffer);
+                }
             }
         });
 

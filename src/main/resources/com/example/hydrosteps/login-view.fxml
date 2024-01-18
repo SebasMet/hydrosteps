@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 
-<GridPane alignment="center" hgap="10" vgap="10"  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.hydrosteps.LoginController">
-    <padding>
-        <Insets top="25" right="25" bottom="10" left="25"/>
-    </padding>
+<?import javafx.scene.shape.Circle?>
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: #333333; -fx-padding: 0 0 300 0;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.example.hydrosteps.LoginController" stylesheets="@styles.css">
+    <!-- StackPane for the logo -->
+    <StackPane alignment="CENTER" VBox.vgrow="ALWAYS" style="-fx-padding: 150 0 0 0;">
+        <Circle fill="WHITE" radius="50" stroke="TRANSPARENT" />
+        <Text text="8" style="-fx-font-size: 40;" />
+    </StackPane>
 
-    <Text text="Login" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
-        <font>
-            <Font size="20"/>
-        </font>
-    </Text>
+    <!-- Login Text -->
+    <Text text="Inloggen" style="-fx-font-size: 24; -fx-fill: white;" />
 
-    <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <!-- User Input Field -->
+    <TextField fx:id="usernameField" promptText="Gebruikersnaam" styleClass="text-field" VBox.vgrow="NEVER" />
 
-    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <!-- Password Input Field -->
+    <PasswordField fx:id="passwordField" promptText="Wachtwoord" styleClass="password-field" VBox.vgrow="NEVER" />
 
-    <Button text="Login" onAction="#handleLogin" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-</GridPane>
+    <!-- Submit Button -->
+    <Button fx:id="submitButton" text="Submit" styleClass="login-button" VBox.vgrow="NEVER" />
+</VBox>

@@ -17,6 +17,8 @@
             <Label fx:id="userWeightLabel" text="Weight: --" textFill="WHITE" style="-fx-font-size: 16px;" />
             <Label fx:id="userHeightLabel" text="Height: --" textFill="WHITE" style="-fx-font-size: 16px;" />
             <Label fx:id="totalStepsLabel" text="Total steps: --" textFill="WHITE" style="-fx-font-size: 16px;"/>
+            <Label fx:id="totalMlWaterConsumed" text="Total ML consumed: --" textFill="WHITE" style="-fx-font-size: 16px;"/>
+
         </VBox>
         <Region HBox.hgrow="ALWAYS" />
         <Button fx:id="logoutButton" mnemonicParsing="false" text="Log Out" style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10px 20px;">
