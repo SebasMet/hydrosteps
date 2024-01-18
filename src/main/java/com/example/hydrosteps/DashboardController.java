@@ -5,6 +5,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
@@ -47,6 +48,12 @@ public class DashboardController {
             totalMlWaterConsumed.setText("Total ML Water Consumed: " + totalAmound);
         });
 
+
+    }
+
+    @FXML
+    protected void handleLogout() {
+        HydroStepsApplication.switchScene("login-view.fxml", (Stage) totalStepsLabel.getScene().getWindow());
 
     }
 }

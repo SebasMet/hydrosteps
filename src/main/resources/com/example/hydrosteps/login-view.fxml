@@ -23,5 +23,5 @@
     <PasswordField fx:id="passwordField" promptText="Wachtwoord" styleClass="password-field" VBox.vgrow="NEVER" />
 
     <!-- Submit Button -->
-    <Button fx:id="submitButton" text="Submit" styleClass="login-button" VBox.vgrow="NEVER" />
+    <Button fx:id="submitButton" text="Submit" onAction="#handleLogin" styleClass="login-button" VBox.vgrow="NEVER" />
 </VBox>
