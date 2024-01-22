@@ -4,17 +4,26 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 
+import java.sql.SQLException;
+
 public class MicrobitReader implements Runnable {
 
     private volatile boolean running = true;
     private SerialPort comPort;
     private StringBuilder buffer = new StringBuilder();
     private DashboardController dashboardController;
+    private DatabaseConnection dbConnection;
 
-    public MicrobitReader(DashboardController dashboardController) {
+
+    public MicrobitReader(DashboardController dashboardController) throws SQLException {
+        this.dbConnection = DatabaseConnection.getInstance(null);
         this.dashboardController = dashboardController;
         comPort = SerialPort.getCommPort("COM3");
         comPort.setBaudRate(115200);
+    }
+
+    public void updateController(DashboardController newController) {
+        this.dashboardController = newController;
     }
 
     @Override
@@ -50,6 +59,7 @@ public class MicrobitReader implements Runnable {
                     } else {
                         System.out.println("UPDATE STEPS");
                         dashboardController.updateTotalSteps(completeData.replaceAll("\\D", ""));
+                        //dbConnection.incrementTotalSteps();
                     }
                     buffer = new StringBuilder();
                     System.out.println("RESET" + buffer);

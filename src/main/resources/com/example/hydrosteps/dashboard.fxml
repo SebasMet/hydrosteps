@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Pos?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="mainContainer" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hydrosteps.DashboardController">
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.ImageView?>
+<VBox fx:id="mainContainer" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hydrosteps.DashboardController" stylesheets="@styles.css">
     <HBox alignment="CENTER_LEFT" spacing="50.0" VBox.vgrow="NEVER">
         <VBox alignment="CENTER_LEFT" spacing="5.0">
             <Label fx:id="userNameLabel" text="User Name" textFill="WHITE" style="-fx-font-size: 16px;">
@@ -18,7 +19,6 @@
             <Label fx:id="userHeightLabel" text="Height: --" textFill="WHITE" style="-fx-font-size: 16px;" />
             <Label fx:id="totalStepsLabel" text="Total steps: --" textFill="WHITE" style="-fx-font-size: 16px;"/>
             <Label fx:id="totalMlWaterConsumed" text="Total ML consumed: --" textFill="WHITE" style="-fx-font-size: 16px;"/>
-
         </VBox>
         <Region HBox.hgrow="ALWAYS" />
         <Button fx:id="logoutButton" onAction="#handleLogout" mnemonicParsing="false" text="Log Out" style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10px 20px;">
@@ -27,5 +27,51 @@
             </HBox.margin>
         </Button>
     </HBox>
+
     <Region VBox.vgrow="ALWAYS" />
+
+    <!-- HBox for centering the ImageView -->
+    <HBox alignment="CENTER" VBox.vgrow="NEVER">
+        <ImageView fx:id="dashboardImage" fitWidth="200" fitHeight="200" preserveRatio="true" />
+    </HBox>
+    <Region VBox.vgrow="ALWAYS" />
+
+    <!-- New Container for Input Fields -->
+    <HBox styleClass="goalContainer" alignment="BOTTOM_RIGHT" spacing="10">
+        <Label  text="Set your goals!" textFill="WHITE" style="-fx-font-size: 16px;" />
+        <TextField fx:id="inputField1" promptText="Input Goal" styleClass="text-field" />
+        <TextField fx:id="inputField2" promptText="Input Goal" styleClass="text-field" />
+        <TextField fx:id="inputField3" promptText="Input Goal" styleClass="text-field" />
+        <Button fx:id="submitGoalButton" text="Update Goals" onAction="#handleGoalChange" styleClass="login-button" VBox.vgrow="NEVER" />
+    </HBox>
+
+    <HBox styleClass="goalCircleContainer" alignment="BOTTOM_LEFT" spacing="20">
+        <!-- Circle 1 with Label -->
+        <VBox alignment="CENTER">
+            <StackPane>
+                <Circle styleClass="circle" fx:id="circle1" radius="30" fill="GRAY"/>
+                <Text fx:id="circleText1" text="9999" fill="WHITE"/>
+            </StackPane>
+            <Label text="Goal 1" textFill="WHITE"/>
+        </VBox>
+
+        <!-- Circle 2 with Label -->
+        <VBox alignment="CENTER">
+            <StackPane>
+                <Circle styleClass="circle" fx:id="circle2" radius="30" fill="GRAY"/>
+                <Text fx:id="circleText2" text="9999" fill="WHITE"/>
+            </StackPane>
+            <Label text="Goal 2" textFill="WHITE"/>
+        </VBox>
+
+        <!-- Circle 3 with Label -->
+        <VBox alignment="CENTER">
+            <StackPane>
+                <Circle styleClass="circle" fx:id="circle3" radius="30" fill="GRAY"/>
+                <Text fx:id="circleText3" text="9999" fill="WHITE"/>
+            </StackPane>
+            <Label text="Goal 3" textFill="WHITE"/>
+        </VBox>
+    </HBox>
+
 </VBox>

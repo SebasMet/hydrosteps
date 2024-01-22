@@ -6,7 +6,7 @@ import java.io.File;
 public class DatabaseConnection {
     private static DatabaseConnection instance;
     private Connection connection;
-    private int currentUserId;
+    private int currentUserId = 1;
     private String url = "jdbc:sqlite:src/hydrosteps.db";
 
     private DatabaseConnection(String args) throws SQLException {
@@ -79,6 +79,87 @@ public class DatabaseConnection {
         return null;
     }
 
+    public int getTotalStepsOfCurrentUser() {
+        String query = "SELECT * FROM User WHERE userID = ?";
+
+        try (PreparedStatement pstmt = this.connection.prepareStatement(query)) {
+            pstmt.setString(1, String.valueOf(this.currentUserId));
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int totalSteps = rs.getInt("totalSteps");
+                    return totalSteps;
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("userID not found");
+        return 0;
+    }
+
+    public void addGoalToCurrentUser(String goal) {
+        String updateQuery = "UPDATE User SET goals = ? WHERE userID = ?";
+
+        try (PreparedStatement pstmt = this.connection.prepareStatement(updateQuery)) {
+            pstmt.setString(1, goal);
+            pstmt.setInt(2, this.currentUserId);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error updating goals: " + e.getMessage());
+        }
+    }
+
+    public String getGoalsOfCurrentUser() {
+        String query = "SELECT goals FROM User WHERE userID = ?";
+        String userGoals = "";
+
+        try (PreparedStatement pstmt = this.connection.prepareStatement(query)) {
+            pstmt.setInt(1, this.currentUserId);
+
+            // Execute the query
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    userGoals = rs.getString("goals");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving goals: " + e.getMessage());
+        }
+        return userGoals;
+    }
+
+    public int incrementTotalSteps() {
+        System.out.println("START databasseconnection");
+        String getStepsQuery = "SELECT totalSteps FROM User WHERE userID = ?";
+        String updateStepsQuery = "UPDATE User SET totalSteps = ? WHERE userID = ?";
+        int totalSteps = 0;
+
+        try (PreparedStatement getStepsStmt = this.connection.prepareStatement(getStepsQuery);
+             PreparedStatement updateStepsStmt = this.connection.prepareStatement(updateStepsQuery)) {
+
+            getStepsStmt.setInt(1, this.currentUserId);
+            try (ResultSet rs = getStepsStmt.executeQuery()) {
+                if (rs.next()) {
+                    totalSteps = rs.getInt("totalSteps");
+                    totalSteps++;
+
+                    updateStepsStmt.setInt(1, totalSteps);
+                    updateStepsStmt.setInt(2, this.currentUserId);
+                    updateStepsStmt.executeUpdate();
+                    System.out.println("123 CHECKPOINT");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error incrementing total steps: " + e.getMessage());
+            return -1; // Return -1 or another appropriate value to indicate an error
+        }
+        System.out.println("DONE");
+        return totalSteps; // Return the new total steps
+    }
+
 
     private void setupDatabase() {
         try (Statement statement = connection.createStatement()) {
@@ -101,7 +182,9 @@ public class DatabaseConnection {
                     "phonenumber VARCHAR(15)," +
                     "emailaddress VARCHAR(255)," +
                     "weight DECIMAL(5,2)," +
-                    "height DECIMAL(5,2));");
+                    "height DECIMAL(5,2)," +
+                    "goals VARCHAR(255)," +
+                    "totalSteps BIGINT);");
 
             statement.execute("CREATE TABLE Doctor (" +
                     "doctorID INT PRIMARY KEY," +
@@ -130,17 +213,17 @@ public class DatabaseConnection {
                     "total_steps INT," +
                     "FOREIGN KEY (userID) REFERENCES User(userID));");
 
-            statement.execute("INSERT INTO User (userID, doctorID, fullname, username, password, phonenumber, emailaddress, weight, height) VALUES " +
-                    "(1, 101, 'Jennifer Lee', 'jenlee', 'pass123', '999000111', 'jennifer@example.com', 68.5, 162.0), " +
-                    "(2, 102, 'Brian Wilson', 'brianw', 'pass124', '123456789', 'brian@example.com', 85.0, 190.0), " +
-                    "(3, 103, 'Linda Johnson', 'lindaj', 'pass125', '777888999', 'linda@example.com', 55.0, 150.0), " +
-                    "(4, 104, 'Chris Taylor', 'christ', 'pass126', '333444555', 'chris@example.com', 70.0, 165.0), " +
-                    "(5, 105, 'Sarah Adams', 'sarahad', 'pass127', '111222333', 'sarah@example.com', 62.5, 160.0), " +
-                    "(6, 106, 'David White', 'davidw', 'pass128', '444555666', 'david@example.com', 75.0, 175.0), " +
-                    "(7, 107, 'Laura Davis', 'laurad', 'pass129', '987654321', 'laura@example.com', 60.0, 155.0), " +
-                    "(8, 108, 'Alex Turner', 'alext', 'pass130', '555666777', 'alex@example.com', 72.0, 170.0), " +
-                    "(9, 109, 'Megan Harris', 'meganh', 'pass131', '444333222', 'megan@example.com', 63.0, 158.0), " +
-                    "(10, 110, 'Jason Miller', 'jasonm', 'pass132', '888777666', 'jason@example.com', 78.0, 180.0);");
+            statement.execute("INSERT INTO User (userID, doctorID, fullname, username, password, phonenumber, emailaddress, weight, height, totalSteps) VALUES " +
+                    "(1, 101, 'Jennifer Lee', 'jenlee', 'pass123', '999000111', 'jennifer@example.com', 68.5, 162.0, 0), " +
+                    "(2, 102, 'Brian Wilson', 'brianw', 'pass124', '123456789', 'brian@example.com', 85.0, 190.0, 0), " +
+                    "(3, 103, 'Linda Johnson', 'lindaj', 'pass125', '777888999', 'linda@example.com', 55.0, 150.0, 0), " +
+                    "(4, 104, 'Chris Taylor', 'christ', 'pass126', '333444555', 'chris@example.com', 70.0, 165.0, 0), " +
+                    "(5, 105, 'Sarah Adams', 'sarahad', 'pass127', '111222333', 'sarah@example.com', 62.5, 160.0, 0), " +
+                    "(6, 106, 'David White', 'davidw', 'pass128', '444555666', 'david@example.com', 75.0, 175.0, 0), " +
+                    "(7, 107, 'Laura Davis', 'laurad', 'pass129', '987654321', 'laura@example.com', 60.0, 155.0, 0), " +
+                    "(8, 108, 'Alex Turner', 'alext', 'pass130', '555666777', 'alex@example.com', 72.0, 170.0, 0), " +
+                    "(9, 109, 'Megan Harris', 'meganh', 'pass131', '444333222', 'megan@example.com', 63.0, 158.0, 0), " +
+                    "(10, 110, 'Jason Miller', 'jasonm', 'pass132', '888777666', 'jason@example.com', 78.0, 180.0, 0);");
 
             statement.execute("INSERT INTO Doctor (doctorID, userID, fullname, username, password, phonenumber, emailaddress) VALUES " +
                     "(101, 1, 'Dr. Smith', 'drsmith', 'docpass1', '111222333', 'dr.smith@example.com'), " +

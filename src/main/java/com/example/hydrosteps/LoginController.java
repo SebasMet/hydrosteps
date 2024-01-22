@@ -31,8 +31,8 @@ public class LoginController {
 
         System.out.println("Username: " + username + ", Password: " + password);
 
-     if(dbConnection.checkCredentials(username, password)) {
-//        if(true) {
+//    if(dbConnection.checkCredentials(username, password)) {
+       if(true) {
              System.out.println("Valid asf");
              HydroStepsApplication.switchScene("dashboard.fxml", (Stage) passwordField.getScene().getWindow());
 

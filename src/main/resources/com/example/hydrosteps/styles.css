@@ -16,3 +16,15 @@
     -fx-border-radius: 20;
     -fx-padding: 10 20;
 }
+
+.goalContainer {
+    -fx-padding: 0 20 20 0;
+}
+
+.goalCricleContainer {
+    -fx-padding: 10 10 10 10;
+}
+
+.circle {
+    -fx-margin: 10;
+}
