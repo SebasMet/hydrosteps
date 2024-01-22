@@ -80,14 +80,14 @@ public class DashboardController {
                 try {
                     this.goals[i] = Integer.parseInt(goalsArray[i].trim());
                 } catch (NumberFormatException e) {
-                    System.out.println("Error parsing goal as integer: " + e.getMessage());
+                    System.out.println("[ERROR] Error parsing goal as integer: " + e.getMessage());
                 }
             }
             this.circleText1.setText(String.valueOf(this.goals[0]));
             this.circleText2.setText(String.valueOf(this.goals[1]));
             this.circleText3.setText(String.valueOf(this.goals[2]));
         } else {
-            System.out.println("No goals found for the current user.");
+            System.out.println("[ERROR] No goals found for the current user.");
         }
     }
 
@@ -95,8 +95,6 @@ public class DashboardController {
         if(this.goals == null) {
             return;
         }
-        System.out.println(this.goals[0] + " and " + dbConnection.getTotalStepsOfCurrentUser());
-
         int totalStepsOfCurrentUser = dbConnection.getTotalStepsOfCurrentUser();
 
         if(goals[0] <= totalStepsOfCurrentUser) {
@@ -111,13 +109,10 @@ public class DashboardController {
     }
 
     public void updateTotalSteps(String newText) {
-//            System.out.println("ACTUAL VALUE " + newText);
-//            System.out.println("2 over");
-        System.out.println("updateStepsCalled in DashboardController");
-            Platform.runLater(() -> {
-                totalStepsLabel.setText("Total Steps: " +  dbConnection.incrementTotalSteps());
-                this.checkGoals();
-            });
+        Platform.runLater(() -> {
+            totalStepsLabel.setText("Total Steps: " +  dbConnection.incrementTotalSteps());
+            this.checkGoals();
+        });
     }
 
     public void updateTotalMlConsumed(String totalAmount) {
@@ -148,8 +143,6 @@ public class DashboardController {
 
             for (int i = 0; i < goals.length; i++) {
                 userGoals += String.valueOf(goals[i]);
-                System.out.println("index: " + i);
-                System.out.println("length: " + goals.length);
                 if(i + 1 != goals.length) {
                     userGoals += ",";
                 }
@@ -159,6 +152,10 @@ public class DashboardController {
         catch (NumberFormatException ex){
             ex.printStackTrace();
         }
+
+        this.circle1.setFill(Color.GRAY);
+        this.circle2.setFill(Color.GRAY);
+        this.circle3.setFill(Color.GRAY);
         this.setUpGoals();
     }
 }

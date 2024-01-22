@@ -29,9 +29,9 @@ public class MicrobitReader implements Runnable {
     @Override
     public void run() {
         if (comPort.openPort()) {
-            System.out.println("Port is open.");
+            System.out.println("[DEBUG] Port is open.");
         } else {
-            System.out.println("Failed to open port.");
+            System.out.println("[ERROR] Failed to open port.");
             return;
         }
 
@@ -53,16 +53,16 @@ public class MicrobitReader implements Runnable {
 //                System.out.println(stringData);
                 if (buffer.toString().contains("\n")) {
                     String completeData = buffer.toString();
-                    System.out.println("String data: " + completeData);
+                    System.out.println("[DEBUG] String data: " + completeData);
                     if (completeData.contains("ML")) {
                         dashboardController.updateTotalMlConsumed(completeData.replaceAll("\\D", ""));
                     } else {
-                        System.out.println("UPDATE STEPS");
+                        System.out.println("[DEBUG] UPDATE STEPS");
                         dashboardController.updateTotalSteps(completeData.replaceAll("\\D", ""));
                         //dbConnection.incrementTotalSteps();
                     }
                     buffer = new StringBuilder();
-                    System.out.println("RESET" + buffer);
+                    System.out.println("[DEBUG] RESET" + buffer);
                 }
             }
         });
@@ -72,13 +72,13 @@ public class MicrobitReader implements Runnable {
             try {
                 Thread.sleep(1000); // !!!Prevent tight looping
             } catch (InterruptedException e) {
-                System.out.println("Thread interrupted");
+                System.out.println("[ERROR] Thread interrupted");
                 break;
             }
         }
 
         comPort.closePort();
-        System.out.println("Port closed.");
+        System.out.println("[DEBUG] Port closed.");
     }
 
     public void stop() {

@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40fcccbf-4e57-4b85-b479-694c914503e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/BluetoothDiscovery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hydrosteps.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/hydrosteps.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/BluetoothDiscovery.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/DashboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/DatabaseConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/HydroStepsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/HydroStepsApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/MicrobitReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hydrosteps/MicrobitReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/hydrosteps/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/DatabaseConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/DatabaseConnection.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/HydroStepsApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/HydroStepsApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/hydrosteps/LoginController.class" afterDir="false" />
@@ -70,14 +67,6 @@
   }
 }</component>
   <component name="RunManager" selected="Application.Normal run">
-    <configuration name="HydroStepsApplication" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.hydrosteps.HydroStepsApplication" />
-      <module name="hydrosteps" />
-      <option name="PROGRAM_PARAMETERS" value="setup" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Normal run" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.example.hydrosteps.HydroStepsApplication" />
       <module name="hydrosteps" />
@@ -86,8 +75,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="setup run" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.example.hydrosteps.HydroStepsApplication" />
+      <module name="hydrosteps" />
+      <option name="PROGRAM_PARAMETERS" value="setup" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Application.HydroStepsApplication" />
+      <item itemvalue="Application.setup run" />
       <item itemvalue="Application.Normal run" />
     </list>
   </component>
@@ -108,7 +105,7 @@
       <workItem from="1705512062345" duration="12627000" />
       <workItem from="1705587675858" duration="4080000" />
       <workItem from="1705764084604" duration="3715000" />
-      <workItem from="1705934486177" duration="3879000" />
+      <workItem from="1705934486177" duration="5535000" />
     </task>
     <servers />
   </component>
@@ -137,16 +134,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/hydrosteps/DatabaseConnection.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

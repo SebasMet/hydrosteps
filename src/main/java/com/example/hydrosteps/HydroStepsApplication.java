@@ -4,9 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import java.io.IOException;
@@ -28,17 +25,16 @@ public class HydroStepsApplication extends Application {
 
             if (fxmlPath.equals("dashboard.fxml") && !isMicrobitReaderStarted) {
                 DashboardController dashboardController = fxmlLoader.getController();
-                System.out.println("MICROBITREADER SETUP");
+                System.out.println("[DEBUG] MICROBITREADER SETUP");
                 startMicrobitReader(dashboardController);
                 isMicrobitReaderStarted = true;
             }
             else if (fxmlPath.equals("dashboard.fxml")) {
                 DashboardController dashboardController = fxmlLoader.getController();
-                System.out.println("MICROBITREADER UPDATE");
+                System.out.println("[DEBUG] MICROBITREADER UPDATE");
                 reader.updateController(dashboardController);
 
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -54,24 +50,13 @@ public class HydroStepsApplication extends Application {
 
 
     public static void main(String[] args) {
-//        System.out.println(args[0]);
-//        try {
-//            DatabaseConnection.getInstance(args[0]);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-////        MicrobitReader reader = new MicrobitReader();
-////        Thread readerThread = new Thread(reader);
-////        readerThread.start();
-//
-//        launch();
-
+        System.out.println("[DEBUG] " + args[0]);
         try {
-            BluetoothDiscovery discovery = new BluetoothDiscovery();
-            discovery.discoverDevices();
+            DatabaseConnection.getInstance(args[0]);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        launch();
     }
 }

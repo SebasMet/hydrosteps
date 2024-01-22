@@ -6,21 +6,20 @@ import java.io.File;
 public class DatabaseConnection {
     private static DatabaseConnection instance;
     private Connection connection;
-    private int currentUserId = 1;
+    private int currentUserId;
     private String url = "jdbc:sqlite:src/hydrosteps.db";
 
     private DatabaseConnection(String args) throws SQLException {
         try {
             this.connection = DriverManager.getConnection(url);
-            System.out.println("Connection to SQLite has been established.");
-            System.out.println("2" + args);
+            System.out.println("[DEBUG] Connection to SQLite has been established.");
             if("setup".equals(args)) {
-                System.out.println("Creating DB");
+                System.out.println("[DEBUG] Creating DB");
                 setupDatabase();
             }
 
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database: " + e.getMessage());
+            System.out.println("[FAILED] Cannot connect to database: " + e.getMessage());
             throw e;
         }
     }
@@ -51,7 +50,7 @@ public class DatabaseConnection {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error checking credentials: " + e.getMessage());
+            System.out.println("[ERROR] Error checking credentials: " + e.getMessage());
         }
         return false;
     }
@@ -75,7 +74,7 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("userID not found");
+        System.out.println("[ERROR] userID not found");
         return null;
     }
 
@@ -95,7 +94,7 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("userID not found");
+        System.out.println("[ERROR] userID not found");
         return 0;
     }
 
@@ -108,7 +107,7 @@ public class DatabaseConnection {
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Error updating goals: " + e.getMessage());
+            System.out.println("[ERROR] Error updating goals: " + e.getMessage());
         }
     }
 
@@ -126,13 +125,12 @@ public class DatabaseConnection {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving goals: " + e.getMessage());
+            System.out.println("[ERROR] Error retrieving goals: " + e.getMessage());
         }
         return userGoals;
     }
 
     public int incrementTotalSteps() {
-        System.out.println("START databasseconnection");
         String getStepsQuery = "SELECT totalSteps FROM User WHERE userID = ?";
         String updateStepsQuery = "UPDATE User SET totalSteps = ? WHERE userID = ?";
         int totalSteps = 0;
@@ -149,21 +147,19 @@ public class DatabaseConnection {
                     updateStepsStmt.setInt(1, totalSteps);
                     updateStepsStmt.setInt(2, this.currentUserId);
                     updateStepsStmt.executeUpdate();
-                    System.out.println("123 CHECKPOINT");
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error incrementing total steps: " + e.getMessage());
+            System.out.println("[ERROR] Error incrementing total steps: " + e.getMessage());
             return -1; // Return -1 or another appropriate value to indicate an error
         }
-        System.out.println("DONE");
         return totalSteps; // Return the new total steps
     }
 
 
     private void setupDatabase() {
         try (Statement statement = connection.createStatement()) {
-            System.out.println("start");
+            System.out.println("[DEBUG] start");
             statement.execute("PRAGMA foreign_keys = OFF;");
 
             statement.execute("DROP TABLE IF EXISTS HydroStep;");
@@ -253,9 +249,9 @@ public class DatabaseConnection {
 
 
 
-            System.out.println("Database setup completed.");
+            System.out.println("[DEBUG] Database setup completed.");
         } catch (SQLException e) {
-            System.out.println("Error setting up database: " + e.getMessage());
+            System.out.println("[ERROR] Error setting up database: " + e.getMessage());
         }
 
     }

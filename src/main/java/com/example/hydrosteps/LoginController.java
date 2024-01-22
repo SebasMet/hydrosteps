@@ -29,16 +29,15 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        System.out.println("Username: " + username + ", Password: " + password);
+        System.out.println("[DEBUG] Username: " + username + ", Password: " + password);
 
-//    if(dbConnection.checkCredentials(username, password)) {
-       if(true) {
-             System.out.println("Valid asf");
+        if(dbConnection.checkCredentials(username, password)) {
+             System.out.println("[DEBUG] Valid asf");
              HydroStepsApplication.switchScene("dashboard.fxml", (Stage) passwordField.getScene().getWindow());
 
-         }
-         else {
-             System.out.println("not valid");
-         }
+        }
+        else {
+             System.out.println("[ERROR] not valid");
+        }
     }
 }
